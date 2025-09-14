@@ -16,9 +16,11 @@ public class AudioManager : MonoBehaviour
 
     //hi, wasn't expecting you here.
     //these are private because i'll have them automatically set themselves
-    private AudioSource mainSource;
-    private AudioSource phraseSource;
-    private AudioClip phraseClip;
+    [Header("Audio sources")]
+    public AudioSource mainSource;
+    public AudioSource phraseSource;
+    [HideInInspector]
+    public AudioClip phraseClip;
 
     //this stuff is just to know when and if the song is over 
     bool sheetMoving;
@@ -27,42 +29,13 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(mainSource == null && gameObject.GetComponent<AudioSource>() == null)
+        if (mainTrack != null)
         {
-            mainSource = gameObject.AddComponent<AudioSource>();
-
-            if (mainTrack != null)
-            {
-                mainSource.clip = mainTrack;
-            }
-            else
-            {
-                Debug.Log("why do you not have a source in place if you're pressing play \nQwQ");
-            }
-        }
-        else if (gameObject.GetComponent<AudioSource>())
-        {
-            mainSource = gameObject.GetComponent<AudioSource>();
-            if (mainTrack != null)
-            {
-                mainSource.clip = mainTrack;
-            }
-            else
-            {
-                Debug.Log("why do you not have a source in place if you're pressing play \nQwQ");
-            }
+            mainSource.clip = mainTrack;
         }
         else
         {
-            if(mainTrack != null) 
-            {
-                mainSource.clip = mainTrack; 
-            }
-            else
-            {
-                Debug.Log("why do you not have a source in place if you're pressing play \nQwQ");
-            }
-            
+            Debug.Log("why do you not have a source in place if you're pressing play \nQwQ");
         }
 
         mainSource.Play();
@@ -81,5 +54,10 @@ public class AudioManager : MonoBehaviour
         if (!sheetMoving){return;}//if the sheet isn't moving then the song is over and we dont need to bother running the code
 
         sheet.transform.localPosition = sheet.transform.localPosition + transform.right * metresPerBeat * BPM/60 * Time.deltaTime;
+    }
+
+    void checkPhrase()
+    {
+
     }
 }
