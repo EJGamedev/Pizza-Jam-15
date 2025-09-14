@@ -7,11 +7,11 @@ public class Phrase : MonoBehaviour
 {
     [Header("Audio Settings")]
 
-    [Tooltip("Audio clip to be played")]
+    [Tooltip("Successful note (key of E)")]
     public AudioClip clip;
-
-    [Tooltip("Clip played on missed note")]
-    public AudioClip failureClip;
+    
+    [Tooltip("Excessive animal")]
+    public AudioClip excessClip;
 
     [Tooltip("Bacon, Poultry, and Mayonnaise")]
     public float BPM;
