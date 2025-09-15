@@ -55,7 +55,7 @@ public class AudioManager : MonoBehaviour
     {
         if (!sheetMoving){return;}//if the sheet isn't moving then the song is over and we dont need to bother running the code
 
-        sheet.transform.localPosition = sheet.transform.localPosition + transform.right * metresPerBeat * BPM/60 * Time.deltaTime;
+        sheet.transform.localPosition = sheet.transform.localPosition - transform.up * metresPerBeat * BPM/60 * Time.deltaTime;
     }
 
     void checkPhrase()
