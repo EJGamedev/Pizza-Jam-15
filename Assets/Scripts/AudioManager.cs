@@ -14,11 +14,11 @@ public class AudioManager : MonoBehaviour
     [Tooltip("The sheet is an object holding all the phrases")]
     public Transform sheet;
     [Tooltip("how many metres should the sheet move per beat")]
-    public float metresPerBeat = 5f;
+    public float metresPerBeat = 0.25f;
 
     //hi, wasn't expecting you here.
     //these are private because i'll have them automatically set themselves
-    [Header("Audio sources")]
+    [Header("Audio sources (do not set)")]
     public AudioSource mainSource;
     public AudioSource phraseSource;
     [HideInInspector]
@@ -31,13 +31,13 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (clickTrack != null)
+        if (mainTrack != null)
         {
-            mainSource.clip = clickTrack;
+            mainSource.clip = mainTrack;
         }
         else
         {
-            Debug.Log("why do you not have a source in place if you're pressing play \nQwQ");
+            Debug.Log("line 40: why do you not have a source in place if you're pressing play \nQwQ");
         }
 
         mainSource.Play();
