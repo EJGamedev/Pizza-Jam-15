@@ -6,19 +6,19 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     [Tooltip("Click Track - accompanies entire level")]
-    public AudioClip clickTrack;
+    public AudioClip mainTrack;
     [Tooltip("Failed note - played when animal is missed")]
     public AudioClip failedClip;
     [Tooltip("Bermuda, Panama, and Mexico")]
     public int BPM;
     [Tooltip("The sheet is an object holding all the phrases")]
-    public Transform sheet; //wondering if sheet can be contructed from an array or json or something...
+    public Transform sheet;
     [Tooltip("how many metres should the sheet move per beat")]
-    public float metresPerBeat = 5f; //... that way changing metersPerBeat won't mean having to move all the phrases
+    public float metresPerBeat = 0.25f;
 
     //hi, wasn't expecting you here.
     //these are private because i'll have them automatically set themselves
-    [Header("Audio sources")]
+    [Header("Audio sources (do not set)")]
     public AudioSource mainSource;
     public AudioSource phraseSource;
     [HideInInspector]
@@ -31,13 +31,13 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (clickTrack != null)
+        if (mainTrack != null)
         {
-            mainSource.clip = clickTrack;
+            mainSource.clip = mainTrack;
         }
         else
         {
-            Debug.Log("why do you not have a source in place if you're pressing play \nQwQ");
+            Debug.LogWarning("line 40: why do you not have a source in place if you're pressing play \nQwQ");
         }
 
         mainSource.Play();
