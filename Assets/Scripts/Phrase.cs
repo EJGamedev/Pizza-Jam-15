@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -7,19 +5,21 @@ public class Phrase : MonoBehaviour
 {
     [Header("Audio Settings")]
 
-    [Tooltip("Successful note (key of E)")]
+    [Tooltip("Successful note")]
     public AudioClip clip;
     
-    [Tooltip("Excessive animal")]
+    [Tooltip("Excessive creature")]
     public AudioClip excessClip;
 
     [Tooltip("Bacon, Poultry, and Mayonnaise")]
     public float BPM;
-    [Tooltip("1 = whole, 2 = 8th, 4 = 16th")]
+    [Tooltip("1 = whole, 2 = half, 4 = quarter, etc.")]
     public float beatDivisions = 1;
 
     [Header("Check Settings")]
-    [Tooltip("This is the cost of the phrase")]
+    [Tooltip("This is the creature required")]
+    public string creature;
+    [Tooltip("This is the number of creatures needed for the phrase")]
     public int cost;
     [Tooltip("Check true to have the gate check on that note")]
     public bool[] doCheck;
@@ -29,4 +29,12 @@ public class Phrase : MonoBehaviour
     [Header("Graphics Settings")]
     [Tooltip("Text displaying the cost")]
     public TextMeshPro displayText;
+
+
+
+
+    private void Awake()
+    {
+        displayText.text = cost.ToString();
+    }
 }
