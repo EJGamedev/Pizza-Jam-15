@@ -6,15 +6,15 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     [Tooltip("Click Track - accompanies entire level")]
-    public AudioClip clickTrack;
+    public AudioClip mainTrack;
     [Tooltip("Failed note - played when animal is missed")]
     public AudioClip failedClip;
     [Tooltip("Bermuda, Panama, and Mexico")]
     public int BPM;
     [Tooltip("The sheet is an object holding all the phrases")]
-    public Transform sheet; //wondering if sheet can be contructed from an array or json or something...
+    public Transform sheet;
     [Tooltip("how many metres should the sheet move per beat")]
-    public float metresPerBeat = 5f; //... that way changing metersPerBeat won't mean having to move all the phrases
+    public float metresPerBeat = 5f;
 
     //hi, wasn't expecting you here.
     //these are private because i'll have them automatically set themselves
