@@ -28,6 +28,7 @@ public class AudioManager : MonoBehaviour
     bool sheetMoving;
 
     private int wholeNotes, eighthNotes, sixteenthNotes;
+    private int eighthTracker, wholeTracker;
     private bool WNreactivate, ENreactivate, SNreactivate;
     
 
@@ -47,10 +48,6 @@ public class AudioManager : MonoBehaviour
 
         sheetMoving = true;
 
-        StartCoroutine(WholeIncrement());
-
-        StartCoroutine(EighthIncrement());
-
         StartCoroutine(SixteenthIncrement());
     }
 
@@ -58,71 +55,38 @@ public class AudioManager : MonoBehaviour
     {
         Debug.Log(wholeNotes + " " +  eighthNotes + " " + sixteenthNotes);
 
-        if (WNreactivate)
-        {
-            WNreactivate = false;
-            StartCoroutine(WholeIncrement());
-        }
-
-        if (ENreactivate)
-        {
-            ENreactivate = false;
-            StartCoroutine(EighthIncrement());
-        }
-
-        if (SNreactivate)
-        {
-            SNreactivate = false;
-            StartCoroutine(SixteenthIncrement());
-        }
+        StartCoroutine(SixteenthIncrement());
     }
 
-    IEnumerator WholeIncrement()
-    {
-        if(wholeNotes < 4)
-        {
-            wholeNotes++;
-        }
-        else if(wholeNotes >= 4)
-        {
-            wholeNotes = 1;
-        }
-        WNreactivate = true;
-        timeIncrementer();
-        yield return new WaitForSeconds(60 / BPM);
-
-    }
-
-    IEnumerator EighthIncrement()
-    {
-        if(eighthNotes < 8)
-        {
-            eighthNotes++;
-        }
-        else if (eighthNotes >= 8)
-        {
-            eighthNotes = 1;
-        }
-        ENreactivate = true;
-        timeIncrementer();
-        yield return new WaitForSeconds(60 / BPM / 2);
-
-    }
 
     IEnumerator SixteenthIncrement()
     {
-        if(sixteenthNotes < 16) 
-        {
-            sixteenthNotes++;
-        }
-        else if (sixteenthNotes >= 16)
-        {
-            sixteenthNotes = 1;
-        }
-        SNreactivate = true;
-        timeIncrementer();
+        
         yield return new WaitForSeconds(60 / BPM / 4);
 
+        sixteenthNotes++;
+
+        if (eighthTracker < 2)
+        {
+            eighthTracker++;
+        }
+        else
+        {
+            eighthNotes++;
+            eighthTracker = 0;
+        }
+
+        if (wholeTracker < 4)
+        {
+            wholeTracker++;
+        }
+        else
+        {
+            wholeNotes++;
+            wholeTracker = 0;
+        }
+
+        timeIncrementer();
     }
 
     // Update is called once per frame
