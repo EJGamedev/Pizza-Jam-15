@@ -27,6 +27,9 @@ public class AudioManager : MonoBehaviour
     //this stuff is just to know when and if the song is over 
     bool sheetMoving;
 
+    private int wholeNotes, eighthNotes, sixteenthNotes;
+    private bool WNreactivate, ENreactivate, SNreactivate;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +46,83 @@ public class AudioManager : MonoBehaviour
         mainSource.Play();
 
         sheetMoving = true;
+
+        StartCoroutine(WholeIncrement());
+
+        StartCoroutine(EighthIncrement());
+
+        StartCoroutine(SixteenthIncrement());
+    }
+
+    void timeIncrementer()
+    {
+        Debug.Log(wholeNotes + " " +  eighthNotes + " " + sixteenthNotes);
+
+        if (WNreactivate)
+        {
+            WNreactivate = false;
+            StartCoroutine(WholeIncrement());
+        }
+
+        if (ENreactivate)
+        {
+            ENreactivate = false;
+            StartCoroutine(EighthIncrement());
+        }
+
+        if (SNreactivate)
+        {
+            SNreactivate = false;
+            StartCoroutine(SixteenthIncrement());
+        }
+    }
+
+    IEnumerator WholeIncrement()
+    {
+        if(wholeNotes < 4)
+        {
+            wholeNotes++;
+        }
+        else if(wholeNotes >= 4)
+        {
+            wholeNotes = 1;
+        }
+        WNreactivate = true;
+        timeIncrementer();
+        yield return new WaitForSeconds(60 / BPM);
+
+    }
+
+    IEnumerator EighthIncrement()
+    {
+        if(eighthNotes < 8)
+        {
+            eighthNotes++;
+        }
+        else if (eighthNotes >= 8)
+        {
+            eighthNotes = 1;
+        }
+        ENreactivate = true;
+        timeIncrementer();
+        yield return new WaitForSeconds(60 / BPM / 2);
+
+    }
+
+    IEnumerator SixteenthIncrement()
+    {
+        if(sixteenthNotes < 16) 
+        {
+            sixteenthNotes++;
+        }
+        else if (sixteenthNotes >= 16)
+        {
+            sixteenthNotes = 1;
+        }
+        SNreactivate = true;
+        timeIncrementer();
+        yield return new WaitForSeconds(60 / BPM / 4);
+
     }
 
     // Update is called once per frame

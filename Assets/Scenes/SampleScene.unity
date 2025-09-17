@@ -551,7 +551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainTrack: {fileID: 8300000, guid: 00f9763ddd650064786b9f88a8fa4056, type: 3}
-  failedClip: {fileID: 8300000, guid: 3cda3c49e1f76e943b69b9126f26cc90, type: 3}
+  failedClip: {fileID: 8300000, guid: 728f6bcc5ce0a5f40a2b1504140c07a5, type: 3}
   BPM: 100
   sheet: {fileID: 881559656}
   metresPerBeat: 1
