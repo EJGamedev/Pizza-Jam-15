@@ -10,7 +10,7 @@ public class AudioManager : MonoBehaviour
     [Tooltip("Failed note - played when animal is missed")]
     public AudioClip failedClip;
     [Tooltip("Bermuda, Panama, and Mexico")]
-    public int BPM;
+    public float BPM;
     [Tooltip("The sheet is an object holding all the phrases")]
     public Transform sheet;
     [Tooltip("how many metres should the sheet move per beat")]
@@ -27,6 +27,10 @@ public class AudioManager : MonoBehaviour
     //this stuff is just to know when and if the song is over 
     bool sheetMoving;
 
+    private int wholeNotes, eighthNotes, sixteenthNotes;
+    private int eighthTracker, wholeTracker;
+
+    private float timer;
 
     // Start is called before the first frame update
     void Start()
@@ -37,12 +41,55 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("line 40: why do you not have a source in place if you're pressing play \nQwQ");
+            Debug.LogWarning("line 40: why do you not have a source in place if you're pressing play \nQwQ");
         }
 
         mainSource.Play();
 
         sheetMoving = true;
+
+        timer = 60 / BPM / 4;
+        Debug.Log(timer);
+        StartCoroutine(SixteenthTimer());
+    }
+
+    void timeIncrementer()
+    {
+        sixteenthNotes++;
+
+        if (eighthTracker < 2)
+        {
+            eighthTracker++;
+        }
+        else
+        {
+            eighthNotes++;
+            eighthTracker = 1;
+        }
+
+        if (wholeTracker < 4)
+        {
+            wholeTracker++;
+        }
+        else
+        {
+            wholeNotes++;
+            wholeTracker = 1;
+        }
+
+        Debug.Log(wholeNotes + " " +  eighthNotes + " " + sixteenthNotes);
+
+        StartCoroutine(SixteenthTimer());
+    }
+
+
+    IEnumerator SixteenthTimer()
+    {
+
+        yield return new WaitForSeconds(timer);
+
+
+        timeIncrementer();
     }
 
     // Update is called once per frame
