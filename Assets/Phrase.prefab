@@ -222,12 +222,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clip: {fileID: 0}
   excessClip: {fileID: 0}
-  BPM: 0
   beatDivisions: 1
   creature: 
   cost: 0
-  doCheck: 01000100
+  doCheck: 
   displayText: {fileID: 2027742120171637021}
+  holdMaterial: {fileID: 2100000, guid: 796d103afd429fb4a99663bf446152ef, type: 2}
 --- !u!33 &2027742122104892517
 MeshFilter:
   m_ObjectHideFlags: 0
