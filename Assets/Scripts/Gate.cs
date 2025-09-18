@@ -29,7 +29,6 @@ public class Gate : MonoBehaviour
             currentPhrase = other.GetComponent<Phrase>();
             audioManager.phraseClip = currentPhrase.clip;
             audioManager.phraseSource.Play();
-            StartCoroutine(TimeIncrement());
         }
         else if(other.GetComponent<Entity>() != null)
         {
@@ -44,7 +43,7 @@ public class Gate : MonoBehaviour
             creatures.Remove(other.GetComponent<Entity>());
         }
     }
-
+    /*
     void runPhrase()
     {
         if(creatureIndex < creatures.Count)
@@ -85,19 +84,5 @@ public class Gate : MonoBehaviour
         }
 
     }
-
-    IEnumerator TimeIncrement()
-    {
-
-        if(currentPhrase != null) 
-        {
-            runPhrase();
-            yield return new WaitForSeconds(60 / currentPhrase.BPM / currentPhrase.beatDivisions);
-        }
-        else
-        {
-
-        }
-
-    }
+    */
 }
