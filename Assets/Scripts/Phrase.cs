@@ -11,9 +11,7 @@ public class Phrase : MonoBehaviour
     [Tooltip("Excessive creature")]
     public AudioClip excessClip;
 
-    [Tooltip("Bacon, Poultry, and Mayonnaise")]
-    public float BPM;
-    [Tooltip("1 = whole, 2 = half, 4 = quarter, etc.")]
+    [Tooltip("1 = whole, 2 = eighth, 4 = sixteenth")]
     public float beatDivisions = 1;
 
     [Header("Check Settings")]
