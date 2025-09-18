@@ -9,8 +9,8 @@ public class Sheet : MonoBehaviour
 
     void Start()
     {
-        Vector3 scale = new Vector3(1, 4*am.metresPerBeat, 1);
-        Vector3 offset = new Vector3(0, sheetOffset, 0);
+        Vector3 scale = new Vector3(1, 4 * am.metresPerBeat, 1);
+        Vector3 offset = new Vector3(0, sheetOffset * am.metresPerBeat , 0);
         List<Vector3> positions = new List<Vector3>();
 
         foreach (Transform t in GetComponentsInChildren <Transform> ()) {

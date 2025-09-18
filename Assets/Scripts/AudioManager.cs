@@ -77,7 +77,7 @@ public class AudioManager : MonoBehaviour
             wholeTracker = 1;
         }
 
-        Debug.Log(wholeNotes + " " +  eighthNotes + " " + sixteenthNotes);
+        Debug.Log(wholeNotes + " 8th:" +  eighthNotes + "  16th" + sixteenthNotes);
 
         StartCoroutine(SixteenthTimer());
     }
