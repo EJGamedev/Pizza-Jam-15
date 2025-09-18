@@ -924,7 +924,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   am: {fileID: 963194230}
-  sheetOffset: 0
+  sheetOffset: -0.5
 --- !u!1001 &955754617
 PrefabInstance:
   m_ObjectHideFlags: 0
