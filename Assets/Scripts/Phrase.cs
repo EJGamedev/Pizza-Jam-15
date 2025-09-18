@@ -22,7 +22,7 @@ public class Phrase : MonoBehaviour
     public bool[] doCheck;
 
     private List<int> noteByIndex = new List<int>();
-    private float metresPerBeat = 1.0f; // Only works for MPB = 1 :(
+    private float metresPerBeat = 1.0f; // need a way to take this from AudioManager directly
 
     [Header("Graphics Settings")]
     [Tooltip("Text displaying the cost")]
@@ -50,7 +50,7 @@ public class Phrase : MonoBehaviour
         Debug.Log(holdLength);
         displayHold.transform.localScale = new Vector3(0.75f, holdLength, 1.05f);
         displayHold.transform.position = this.transform.position;
-        displayHold.transform.position += new Vector3(0.0f, (holdLength/8.0f) - 0.125f, 0.0f);
+        displayHold.transform.position += new Vector3(0.0f, ((holdLength/2.0f) - (0.5f/metresPerBeat))/4.0f, 0.0f);
 
         /* THIS BREAKS THE GAME FOR SOME REASON :/
 

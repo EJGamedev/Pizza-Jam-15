@@ -7,7 +7,7 @@ public class Sheet : MonoBehaviour
     public AudioManager am;
     public float sheetOffset = 0f;
 
-    void Start()
+    void Awake()
     {
         Vector3 scale = new Vector3(1, 4 * am.metresPerBeat, 1);
         Vector3 offset = new Vector3(0, sheetOffset * am.metresPerBeat , 0);
