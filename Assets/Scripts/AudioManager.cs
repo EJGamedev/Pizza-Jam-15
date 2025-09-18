@@ -15,19 +15,19 @@ public class AudioManager : MonoBehaviour
     public Transform sheet;
     [Tooltip("how many metres should the sheet move per beat")]
     public float metresPerBeat = 0.25f;
+    [Tooltip("this object checks for phase collisions")]
+    public Gate gate;
 
-    //hi, wasn't expecting you here.
-    //these are private because i'll have them automatically set themselves
-    [Header("Audio sources (do not set)")]
+    [Header("Audio source")]
     public AudioSource mainSource;
-    public AudioSource phraseSource;
     [HideInInspector]
-    public AudioClip phraseClip;
+    public List<Phrase> phrases;
 
     //this stuff is just to know when and if the song is over 
     bool sheetMoving;
 
-    private int wholeNotes, eighthNotes, sixteenthNotes;
+    [HideInInspector]
+    public int wholeNotes, eighthNotes, sixteenthNotes;
     private int eighthTracker, wholeTracker;
 
     private float timer;
@@ -35,6 +35,13 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(mainSource == null)
+        {
+            mainSource = transform.AddComponent<AudioSource>();
+            mainSource.loop = false;//loop disabled because level should end after the song is over instead of restarting
+            //Herbie, if theres any other settings you want set here go ahead. but as long as you set it in the editor it will stay that way
+        }
+
         if (mainTrack != null)
         {
             mainSource.clip = mainTrack;
@@ -92,6 +99,25 @@ public class AudioManager : MonoBehaviour
         timeIncrementer();
     }
 
+    public void checkPhrases()
+    {
+        foreach(Phrase p in phrases)
+        {
+            if(p.beatDivisions == 1)
+            {
+
+            }
+            else if(p.beatDivisions == 2)
+            {//hi its EJ here. ill finish this code tomorrow cos its 3 in the morning and i did most of the architecture and now i just need to do the logic and im tired lol ok gn good luck
+
+            }
+            else if (p.beatDivisions == 4)
+            {
+
+            }
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -105,8 +131,40 @@ public class AudioManager : MonoBehaviour
         sheet.transform.localPosition = sheet.transform.localPosition - transform.up * metresPerBeat * BPM/60 * Time.deltaTime;
     }
 
-    void checkPhrase()
+    public void addPhrase(Phrase newPhrase)
     {
+        phrases.Add(newPhrase);
 
+        if(newPhrase.beatDivisions == 1)
+        {
+            newPhrase.startBeat = wholeNotes;
+        }
+        else if (newPhrase.beatDivisions == 2)
+        {
+            newPhrase.startBeat = eighthNotes;
+        }
+        else if (newPhrase.beatDivisions == 4)
+        {
+            newPhrase.startBeat = sixteenthNotes;
+        }
+        else
+        {
+            Debug.LogWarning("Hey, your phrase has an incompatible beat division");
+        }
+
+        if (newPhrase.source == null )
+        {
+            newPhrase.source = transform.AddComponent<AudioSource>();
+        }
+
+        newPhrase.source.loop = false;
+        newPhrase.source.clip = newPhrase.clip;
+        newPhrase.source.Play();
+    }
+
+    public void removePhrase(Phrase oldPhrase)
+    {
+        phrases.Remove(oldPhrase);
+        Destroy(oldPhrase.source);
     }
 }

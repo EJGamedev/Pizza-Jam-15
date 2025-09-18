@@ -28,8 +28,11 @@ public class Phrase : MonoBehaviour
     [Tooltip("Text displaying the cost")]
     public TextMeshPro displayText;
 
-
-
+    //these two variables accommodate the audio manager
+    //it stores where in the list it is as well as what beat the phrase was activated on all within the phrase itself
+    //its public so the audio manager can access it easily but hideininspector because its not meant to be edited by us at all
+    [HideInInspector] public int startBeat;
+    [HideInInspector] public AudioSource source;
 
     private void Awake()
     {
