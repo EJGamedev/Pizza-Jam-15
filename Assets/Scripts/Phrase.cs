@@ -30,11 +30,19 @@ public class Phrase : MonoBehaviour
     public Material holdMaterial;
     public Material noteMaterial;
 
+<<<<<<< HEAD
+    //these two variables accommodate the audio manager
+    //it stores where in the list it is as well as what beat the phrase was activated on all within the phrase itself
+    //its public so the audio manager can access it easily but hideininspector because its not meant to be edited by us at all
+    [HideInInspector] public int startBeat;
+    [HideInInspector] public AudioSource source;
+=======
     private GameObject displayHold;
     private Vector3 holdScale, holdPosition;
 
     // private GameObject[] displayNotes;
 
+>>>>>>> ce5c0f1d6e1f89798d7f885fe8fa7449c5e7f554
 
     private void Awake()
     {
