@@ -53,12 +53,14 @@ public class Phrase : MonoBehaviour
         displayHold.transform.position += new Vector3(0.0f, ((holdLength/2.0f) - (0.5f/metresPerBeat))/4.0f, 0.0f);
 
         /* THIS BREAKS THE GAME FOR SOME REASON :/
-
+        
         for (int a = 0; a < doCheck.Length;) {
             if (doCheck[a] == true) {
                 noteByIndex.Add(a);
                 }
         }
+
+        
         for (int a = 0; a < noteByIndex.Count;) {
             if (a == 0) { continue; }
             float noteDistance = (noteByIndex[a] / beatDivisions) * metresPerBeat;
