@@ -20,9 +20,11 @@ public class Gate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<Phrase>() != null)
+        //Debug.Log("found something");
+        if (other.GetComponent<Phrase>() != null)
         {
             audioManager.addPhrase(other.GetComponent<Phrase>());
+            //Debug.Log("sent phrase");
         }
     }
 }
