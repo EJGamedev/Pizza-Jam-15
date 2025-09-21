@@ -4,6 +4,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -45,6 +46,7 @@ public class AudioManager : MonoBehaviour
         {
             mainSource = transform.AddComponent<AudioSource>();
             mainSource.loop = false;//loop disabled because level should end after the song is over instead of restarting
+            mainSource.volume = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
             //Herbie, if theres any other settings you want set here go ahead. but as long as you set it in the editor it will stay that way
         }
 
@@ -53,6 +55,7 @@ public class AudioManager : MonoBehaviour
             failedSource = transform.AddComponent<AudioSource>();
             failedSource.loop = false;
             failedSource.clip = failedClip;
+            failedSource.volume = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
         }
 
         if (mainTrack != null)
@@ -299,6 +302,7 @@ public class AudioManager : MonoBehaviour
         newPhrase.source.loop = false;
         newPhrase.source.clip = newPhrase.clip;
         newPhrase.source.Play();
+        newPhrase.source.volume = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
     }
 
     public void removePhrase(Phrase oldPhrase)
@@ -311,6 +315,8 @@ public class AudioManager : MonoBehaviour
     public void input()
     {
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition); // Construct a ray from the current mouse coordinates
+
+        if(Input.GetAxis("Cancel") > 0) { SceneManager.LoadScene("Menu"); }
 
         if (m1 > 0 && !clicked)
         {
