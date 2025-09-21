@@ -25,6 +25,7 @@ public class Phrase : MonoBehaviour
 
     [Header("Graphics Settings")]
     [Tooltip("Text displaying the cost")]
+    public float offset;
     public TextMeshPro displayText;
     public TrailRenderer trailRenderer;
     public Material holdMaterial;
@@ -51,7 +52,7 @@ public class Phrase : MonoBehaviour
         displayText.text = cost.ToString();
 
         trailRenderer = GetComponent<TrailRenderer>();
-        trailRenderer.time = metresPerBeat * (doCheck.Length / beatDivisions);
+        trailRenderer.time = metresPerBeat * (doCheck.Length / beatDivisions) - offset;
         /*
         float holdLength = (doCheck.Length / beatDivisions) / metresPerBeat;
 
@@ -68,12 +69,14 @@ public class Phrase : MonoBehaviour
         displayHold.transform.position += new Vector3(0.0f, ((holdLength/2.0f) - (0.5f/metresPerBeat))/4.0f, 0.0f);
         */
         /* THIS BREAKS THE GAME FOR SOME REASON :/
-
+        
         for (int a = 0; a < doCheck.Length;) {
             if (doCheck[a] == true) {
                 noteByIndex.Add(a);
                 }
         }
+
+        
         for (int a = 0; a < noteByIndex.Count;) {
             if (a == 0) { continue; }
             float noteDistance = (noteByIndex[a] / beatDivisions) * metresPerBeat;
