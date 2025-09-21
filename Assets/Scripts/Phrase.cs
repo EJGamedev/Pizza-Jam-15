@@ -25,6 +25,7 @@ public class Phrase : MonoBehaviour
 
     [Header("Graphics Settings")]
     [Tooltip("Text displaying the cost")]
+    public float offset;
     public TextMeshPro displayText;
     public TrailRenderer trailRenderer;
     public Material holdMaterial;
@@ -51,7 +52,7 @@ public class Phrase : MonoBehaviour
         displayText.text = cost.ToString();
 
         trailRenderer = GetComponent<TrailRenderer>();
-        trailRenderer.time = metresPerBeat * (doCheck.Length / beatDivisions);
+        trailRenderer.time = metresPerBeat * (doCheck.Length / beatDivisions) - offset;
         /*
         float holdLength = (doCheck.Length / beatDivisions) / metresPerBeat;
 

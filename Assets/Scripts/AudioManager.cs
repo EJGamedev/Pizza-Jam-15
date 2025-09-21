@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -8,6 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
+    public bool debug_mode;
     [Tooltip("Click Track - accompanies entire level")]
     public AudioClip mainTrack;
     [Tooltip("Failed note - played when animal is missed")]
@@ -16,6 +18,8 @@ public class AudioManager : MonoBehaviour
     public float BPM;
     [Tooltip("The sheet is an object holding all the phrases")]
     public Transform sheet;
+    [Tooltip("sheet starting point")]
+    public Vector3 sheetOrigin;
     [Tooltip("how many metres should the sheet move per beat")]
     public float metresPerBeat = 0.25f;
     [Tooltip("this object checks for phase collisions")]
@@ -67,12 +71,12 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("line 40: why do you not have a source in place if you're pressing play \nQwQ");
         }
 
-        mainSource.Play();
-
         sheetMoving = true;
 
         timer = 60 / BPM / 4;
-        
+
+        mainSource.Play();
+
         StartCoroutine(SixteenthTimer());
     }
 
@@ -108,11 +112,12 @@ public class AudioManager : MonoBehaviour
     }
 
 
+
     IEnumerator SixteenthTimer()
     {
-
         yield return new WaitForSeconds(timer);
 
+        sheet.transform.localPosition =  new Vector3(sheetOrigin.x, sheetOrigin.y * (-sixteenthNotes - 2) * metresPerBeat/4, sheetOrigin.z);
 
         timeIncrementer();
     }
@@ -124,8 +129,6 @@ public class AudioManager : MonoBehaviour
         foreach(Phrase p in phrases)//loop each phrase thats been detected
         {
             bool success = false;
-
-            
 
             if (p.beatDivisions == 1)//check if the phrase we're currently on is a whole note phrase
             {
@@ -152,7 +155,7 @@ public class AudioManager : MonoBehaviour
                     }
 
                     p.index++;
-                    if (!success)//if while looping entities no match was found then it should count as a failure and will play the fail sfx
+                    if ((!success) && (!debug_mode))//if while looping entities no match was found then it should count as a failure and will play the fail sfx
                     {
                         p.source.mute = true;
                         failedSource.Play();
@@ -248,6 +251,7 @@ public class AudioManager : MonoBehaviour
         {
             foreach (Phrase p in blacklistedPhrases)
             {
+                Thread.Sleep(500);
                 removePhrase(p);
             }
             blacklistedPhrases.Clear();
@@ -261,7 +265,7 @@ public class AudioManager : MonoBehaviour
     {
         m1 = Input.GetAxis("Fire1");
 
-        moveSheet();
+        // moveSheet();
 
         input();
     }

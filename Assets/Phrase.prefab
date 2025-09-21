@@ -227,12 +227,14 @@ MonoBehaviour:
   creature: 
   cost: 0
   doCheck: 
+  offset: 0
   displayText: {fileID: 2027742120171637021}
   trailRenderer: {fileID: 0}
   holdMaterial: {fileID: 2100000, guid: 796d103afd429fb4a99663bf446152ef, type: 2}
   noteMaterial: {fileID: 0}
   startBeat: 0
   source: {fileID: 0}
+  index: 0
 --- !u!33 &2027742122104892517
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -295,7 +297,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!96 &-3585298360778116228
 TrailRenderer:
   serializedVersion: 2
